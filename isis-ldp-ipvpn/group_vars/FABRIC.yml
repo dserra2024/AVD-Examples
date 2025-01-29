@@ -1,0 +1,97 @@
+---
+# Ansible connectivity definitions
+# eAPI connectivity via HTTPS is specified (as opposed to CLI via SSH)
+ansible_connection: ansible.netcommon.httpapi
+# Specifies that we are indeed using Arista EOS
+ansible_network_os: arista.eos.eos
+# This user/password must exist on the switches to enable Ansible access
+ansible_user: admin
+ansible_password: admin
+# User escalation (to enter enable mode)
+ansible_become: true
+ansible_become_method: enable
+# Use SSL (HTTPS)
+ansible_httpapi_use_ssl: true
+# Do not try to validate certs
+ansible_httpapi_validate_certs: false
+
+design:
+  type: mpls
+
+# Common AVD group variables
+fabric_name: FABRIC
+
+# Define underlay and overlay routing protocol to be used
+###underlay_routing_protocol: isis-ldp
+###overlay_routing_protocol: ibgp
+
+# Local users
+local_users:
+  # Define a new user, which is called "ansible"
+  - name: ansible
+    privilege: 15
+    role: network-admin
+    # Password set to "ansible". Same string as the device generates when configuring a username.
+    sha512_password: $6$QJUtFkyu9yoecsq.$ysGzlb2YXaIMvezqGEna7RE8CMALJHnv7Q1i.27VygyKUtSeX.n2xRTyOtCR8eOAl.4imBLyhXFc4o97P5n071
+  - name: admin
+    privilege: 15
+    role: network-admin
+    sha512_password: $6$sb1fwR5m0WhrRSOI$zpexN/u/f8zX4wujhb/F0Z1wJJ8rwmcgo5W/OwLENIWXCTkTFy8sUXlllQvRn4EZbRkka0VQAWWdJFZtZItgz1
+
+# BGP peer groups passwords
+bgp_peer_groups:
+  # all passwords set to "arista"
+  #mpls_overlay_peers:
+  #  password: $1c$G8BQN0ezkiJOX2cuAYpsEA==
+  #rr_overlay_peers:
+  #  password: $1c$G8BQN0ezkiJOX2cuAYpsEA==
+
+management_security:
+  password:
+    encryption_key_common: true
+
+###!!!!!!!!!!!! -- MY EXTRA STUFF STARTS HERE:
+node_type_keys:
+
+  - key: p
+    type: p
+    default_mpls_overlay_role: none
+    default_overlay_routing_protocol: ibgp
+    default_underlay_routing_protocol: isis-ldp
+    mpls_lsr: true
+
+  - key: pe
+    type: pe
+    connected_endpoints: true
+    default_evpn_encapsulation: mpls
+    default_evpn_role: client
+    default_mpls_overlay_role: client
+    default_overlay_address_families:
+      - vpn-ipv4
+    default_overlay_routing_protocol: ibgp
+    default_underlay_routing_protocol: isis-ldp
+    mpls_lsr: true
+    network_services:
+      l1: true
+      l2: true
+      l3: true
+
+  - key: rr
+    type: rr
+    default_evpn_encapsulation: mpls
+    default_evpn_role: server
+    default_mpls_overlay_role: server
+    default_overlay_address_families:
+      - vpn-ipv4
+    default_overlay_routing_protocol: ibgp
+    default_underlay_routing_protocol: isis-ldp
+    mpls_lsr: true
+
+  - key: cpe
+    type: cpe
+    connected_endpoints: true
+    default_overlay_routing_protocol: none
+    default_underlay_routing_protocol: ebgp
+    network_services:
+      l3: true
+
