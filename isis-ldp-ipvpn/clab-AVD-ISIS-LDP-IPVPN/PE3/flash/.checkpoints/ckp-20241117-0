@@ -1,0 +1,44 @@
+! The checkpoint file saved at Sun Nov 17 23:48:41 2024 by admin
+! device: PE3 (cEOSLab, EOS-4.31.3M-36737551.4313M (engineering build))
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$nWRIa7MW1ugfaSFJ$HAp10tDnb5Lba1RPPiD4ai.Ui7.SCVC/saljzQboLwDuaXSt8FDIbFIEq4Fqk/iZRbyY/eZxTXlajOyxNDnPm0
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname PE3
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+management api http-commands
+   no shutdown
+!
+management api gnmi
+   transport grpc default
+!
+management api netconf
+   transport ssh default
+!
+interface Ethernet1
+!
+interface Ethernet2
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Management1
+   ip address 172.16.1.103/24
+!
+no ip routing
+!
+ip route 0.0.0.0/0 172.16.1.1
+!
+end

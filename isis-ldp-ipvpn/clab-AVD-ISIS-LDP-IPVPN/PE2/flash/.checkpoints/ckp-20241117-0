@@ -1,0 +1,42 @@
+! The checkpoint file saved at Sun Nov 17 23:50:01 2024 by admin
+! device: PE2 (cEOSLab, EOS-4.31.3M-36737551.4313M (engineering build))
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$oppmYAmBa3h/3j3U$mjyvtxEL/zaSI4cISkjMUD8SgdXDXKdZR/EN2uJfkxKaq12ci8C6YillJkPojCUZRa9tcrPkwPQ/IMJZYj.Zv1
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname PE2
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+management api http-commands
+   no shutdown
+!
+management api gnmi
+   transport grpc default
+!
+management api netconf
+   transport ssh default
+!
+interface Ethernet1
+!
+interface Ethernet2
+!
+interface Ethernet4
+!
+interface Management1
+   ip address 172.16.1.102/24
+!
+no ip routing
+!
+ip route 0.0.0.0/0 172.16.1.1
+!
+end

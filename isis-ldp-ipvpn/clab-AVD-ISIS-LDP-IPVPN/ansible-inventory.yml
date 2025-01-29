@@ -1,0 +1,35 @@
+all:
+  vars:
+    # The generated inventory is assumed to be used from the clab host.
+    # Hence no http proxy should be used. Therefore we make sure the http
+    # module does not attempt using any global http proxy.
+    ansible_httpapi_use_proxy: false
+  children:
+    arista_ceos:
+      vars:
+        # ansible_connection: set ansible_connection variable if required
+        ansible_user: admin
+        ansible_password: admin
+      hosts:
+        clab-AVD-ISIS-LDP-IPVPN-CPE1:
+          ansible_host: 172.16.1.161
+        clab-AVD-ISIS-LDP-IPVPN-CPE2:
+          ansible_host: 172.16.1.162
+        clab-AVD-ISIS-LDP-IPVPN-P1:
+          ansible_host: 172.16.1.11
+        clab-AVD-ISIS-LDP-IPVPN-P2:
+          ansible_host: 172.16.1.12
+        clab-AVD-ISIS-LDP-IPVPN-P3:
+          ansible_host: 172.16.1.13
+        clab-AVD-ISIS-LDP-IPVPN-P4:
+          ansible_host: 172.16.1.14
+        clab-AVD-ISIS-LDP-IPVPN-PE1:
+          ansible_host: 172.16.1.101
+        clab-AVD-ISIS-LDP-IPVPN-PE2:
+          ansible_host: 172.16.1.102
+        clab-AVD-ISIS-LDP-IPVPN-PE3:
+          ansible_host: 172.16.1.103
+        clab-AVD-ISIS-LDP-IPVPN-RR1:
+          ansible_host: 172.16.1.151
+        clab-AVD-ISIS-LDP-IPVPN-RR2:
+          ansible_host: 172.16.1.152
