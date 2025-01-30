@@ -1,6 +1,6 @@
-custom_structured_configuration_vlans:
-  - id: 55
-    name: MCS-VLAN
+#custom_structured_configuration_vlans:
+#  - id: 55
+#    name: MCS-VLAN
 
 #vlan interfaces
 custom_structured_configuration_vlan_interfaces:
