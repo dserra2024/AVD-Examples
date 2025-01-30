@@ -94,7 +94,7 @@ node_type_keys:
     connected_endpoints: true
     default_evpn_role: client
     default_ptp_priority1: 30
-    mlag_support: false
+    mlag_support: true
     network_services:
       l2: true
       l3: true
