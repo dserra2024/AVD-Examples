@@ -16,3 +16,16 @@ custom_structured_configuration_static_routes:
     destination_address_prefix: 0.0.0.0/0
     gateway: 55.55.55.1
     name: DEFAULT-ROUTE
+
+custom_structured_configuration_cvx:
+  shutdown: false
+  services:
+    mcs:
+      redis:
+        password: admin
+        password_type: 0
+      shutdown: false
+
+custom_structured_configuration_management_api_http:
+  enable_http: true
+  shutdown: false
