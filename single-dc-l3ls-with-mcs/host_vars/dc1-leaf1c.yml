@@ -10,3 +10,9 @@ custom_structured_configuration_vlan_interfaces:
     ip_address: 55.55.55.11/24
 
 custom_structured_configuration_ip_routing: true
+
+custom_structured_configuration_static_routes:
+  - vrf: default
+    destination_address_prefix: 0.0.0.0/0
+    gateway: 55.55.55.1
+    name: DEFAULT-ROUTE
