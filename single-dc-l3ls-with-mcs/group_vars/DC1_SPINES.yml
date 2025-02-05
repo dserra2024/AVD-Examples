@@ -1,2 +1,11 @@
 ---
 type: spine
+
+custom_structured_configuration_management_cvx:
+  shutdown: false
+  server_hosts:
+    - 55.55.55.11
+  source_interface: Loopback0
+  
+custom_structured_configuration_mcs_client:
+  shutdown: false
