@@ -1,0 +1,96 @@
+name: AVD-ISIS-LDP-IPVPN
+
+mgmt:
+  network: fixedips
+  ipv4-subnet: 172.20.1.0/24
+
+topology:
+  nodes:
+    P1:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.11
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    P2:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.12
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    P3:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.13
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    P4:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.14
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    PE1:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.101
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    PE2:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.102
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    PE3:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.103
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    RR1:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.151
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    RR2:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.152
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    CPE1:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.161
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    CPE2:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.1.162
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+
+
+  links:
+    - endpoints: ["PE1:eth1",   "P1:eth1"]
+    - endpoints: ["PE1:eth2",   "P2:eth2"]
+    - endpoints: ["PE2:eth2",   "P1:eth2"]
+    - endpoints: ["PE2:eth1",   "P2:eth1"]
+    - endpoints: ["P1:eth4",    "P2:eth4"]
+    - endpoints: ["P1:eth3",    "RR1:eth3"]
+    - endpoints: ["P2:eth3",    "RR2:eth3"]
+    - endpoints: ["RR1:eth4",   "RR2:eth4"]
+    - endpoints: ["RR1:eth2",   "P3:eth2"]
+    - endpoints: ["RR2:eth2",   "P4:eth2"]
+    - endpoints: ["P3:eth4",    "P4:eth4"]
+    - endpoints: ["P3:eth1",    "PE3:eth1"]
+    - endpoints: ["P4:eth3",    "PE3:eth3"]
+    - endpoints: ["CPE1:eth3",  "PE1:eth3"]
+    - endpoints: ["CPE1:eth4",  "PE2:eth4"]
+    - endpoints: ["CPE2:eth2",  "PE3:eth2"]
+    - endpoints: ["CPE2:eth4",  "PE3:eth4"]
+
+
