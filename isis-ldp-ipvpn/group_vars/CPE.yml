@@ -1,6 +1,6 @@
 ---
 # Default gateway used for the management interface
-mgmt_gateway: 172.16.1.1
+mgmt_gateway: 172.20.1.1
 
 # iBGP ASN for the fabric
 bgp_as: 65111
@@ -24,10 +24,10 @@ cpe:
   nodes:
     - name: cpe1
       id: 14
-      mgmt_ip: 172.16.1.161/24
+      mgmt_ip: 172.20.1.161/24
     - name: cpe2
       id: 15
-      mgmt_ip: 172.16.1.162/24
+      mgmt_ip: 172.20.1.162/24
 
 core_interfaces:
   p2p_links:
