@@ -1,0 +1,77 @@
+name: AVD-L3LS
+
+mgmt:
+  network: fixedips
+  ipv4-subnet: 172.20.20.0/24
+
+topology:
+  nodes:
+    DC1-SPINE1:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.20.3
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    DC1-SPINE2:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.20.7
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    DC1-LEAF1A:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.20.5
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    DC1-LEAF1B:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.20.8
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    DC1-LEAF1C:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.20.2
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    DC1-LEAF2A:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.20.9
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    DC1-LEAF2B:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.20.4
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+    DC1-LEAF2C:
+      kind: arista_ceos
+      image: ceosimage:4.31.3M
+      mgmt-ipv4: 172.20.20.6
+      binds:
+        - mymapping.json:/mnt/flash/EosIntfMapping.json:ro
+
+
+  links:
+    - endpoints: ["DC1-SPINE1:eth1", "DC1-LEAF1A:eth1"]
+    - endpoints: ["DC1-SPINE1:eth2", "DC1-LEAF1B:eth1"]
+    - endpoints: ["DC1-SPINE1:eth3", "DC1-LEAF2A:eth1"]
+    - endpoints: ["DC1-SPINE1:eth4", "DC1-LEAF2B:eth1"]
+    - endpoints: ["DC1-SPINE2:eth1", "DC1-LEAF1A:eth2"]
+    - endpoints: ["DC1-SPINE2:eth2", "DC1-LEAF1B:eth2"]
+    - endpoints: ["DC1-SPINE2:eth3", "DC1-LEAF2A:eth2"]
+    - endpoints: ["DC1-SPINE2:eth4", "DC1-LEAF2B:eth2"]
+    - endpoints: ["DC1-LEAF1A:eth3", "DC1-LEAF1B:eth3"]
+    - endpoints: ["DC1-LEAF1A:eth4", "DC1-LEAF1B:eth4"]
+    - endpoints: ["DC1-LEAF2A:eth3", "DC1-LEAF2B:eth3"]
+    - endpoints: ["DC1-LEAF2A:eth4", "DC1-LEAF2B:eth4"]
+    - endpoints: ["DC1-LEAF1A:eth8", "DC1-LEAF1C:eth1"]
+    - endpoints: ["DC1-LEAF1B:eth8", "DC1-LEAF1C:eth2"]
+    - endpoints: ["DC1-LEAF2A:eth8", "DC1-LEAF2C:eth1"]
+    - endpoints: ["DC1-LEAF2B:eth8", "DC1-LEAF2C:eth2"]
+
+
