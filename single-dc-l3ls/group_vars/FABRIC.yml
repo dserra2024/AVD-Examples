@@ -21,6 +21,15 @@ fabric_name: FABRIC
 # Define underlay and overlay routing protocol to be used
 underlay_routing_protocol: ebgp
 overlay_routing_protocol: ebgp
+underlay_multicast: true
+evpn_multicast: true
+underlay_multicast_rps:
+  - rp: 1.1.1.1
+    nodes:
+      - name: dc1-spine1
+        loopback_number: 101
+      - name: dc1-spine2
+        loopback_number: 101
 
 # Local users
 local_users:
@@ -94,7 +103,7 @@ node_type_keys:
     connected_endpoints: true
     default_evpn_role: client
     default_ptp_priority1: 30
-    mlag_support: false
+    mlag_support: true
     network_services:
       l2: true
       l3: true
